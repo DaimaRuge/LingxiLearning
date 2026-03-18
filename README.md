@@ -3,8 +3,8 @@
 > 🧠 首款基于大模型 Agent 的个人终身学习数字伴侣
 
 [![License](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE)
-[![Version](https://img.shields.io/badge/version-0.1.0-green.svg)]()
-[![AI](https://img.shields.io/badge/AI-Agent-orange.svg)]()
+[![Python](https://img.shields.io/badge/python-3.10+-green.svg)]()
+[![Version](https://img.shields.io/badge/version-0.2.0-green.svg)]()
 
 ---
 
@@ -30,13 +30,13 @@
 | M4 | 个人终身学习伴侣 | 🚧 开发中 |
 | M5 | 课程规划与内容生成 | 📋 规划中 |
 
-### 核心特性
+### 核心特性 (POC 阶段)
 
-- 📚 **知识图谱** - Connected Papers 风格的可视化知识关联
-- 🤖 **AI 伴侣** - 像"夫子"一样的个人学习伙伴
-- 🔍 **智能索引** - 多格式文档自动解析与检索
-- 📈 **成长追踪** - 学习轨迹可视化与记忆进化
-- ✍️ **创作辅助** - AI 赋能的内容创作
+- 📚 **文档解析** - PDF/EPUB/MD/TXT 多格式支持
+- 🔍 **向量检索** - BGE 中文向量化 + Qdrant 存储
+- 🤖 **RAG 对话** - 基于检索的 AI 问答
+- 🗂️ **知识图谱** - 规划中
+- 📈 **成长追踪** - 规划中
 
 ---
 
@@ -52,14 +52,16 @@ Agent 服务层：OpenClaw-style Framework
 基础模型层：GLM-5 / GPT-4 + BGE + LLaVA
 ```
 
-### 核心技术栈
+### POC 技术栈
 
-| 层级 | 技术 |
-|------|------|
-| 前端 | React, TypeScript, D3.js |
-| 后端 | Python, FastAPI, LangChain |
-| 数据库 | PostgreSQL, Neo4j, Milvus, Redis, MinIO |
-| AI | GLM-5, BGE, PaddleOCR, Whisper |
+| 组件 | 技术 | 状态 |
+|------|------|------|
+| Web UI | Streamlit | 🚧 开发中 |
+| 后端 | FastAPI | 🚧 开发中 |
+| 向量数据库 | Qdrant | ✅ 就绪 |
+| Embedding | BGE-large-zh | ✅ 就绪 |
+| LLM | GLM-5 | 🚧 接入中 |
+| 文档解析 | PyMuPDF | ✅ 就绪 |
 
 ---
 
@@ -124,13 +126,50 @@ LingxiLearning/
 git clone https://github.com/DaimaRuge/LingxiLearning.git
 
 # 安装依赖
+cd lingxi_poc
 pip install -r requirements.txt
 
-# 运行后端
-cd server && uvicorn main:app --reload
+# 启动 Qdrant (Docker)
+docker run -d -p 6333:6333 qdrant/qdrant
 
-# 运行前端
-cd web && npm install && npm run dev
+# 运行 Streamlit UI
+streamlit run lingxi_poc/app.py
+```
+
+### 项目结构
+
+```
+lingxi_poc/
+├── backend/
+│   ├── services/
+│   │   ├── parser.py       # 文档解析
+│   │   ├── embedding.py     # 向量化
+│   │   ├── vector.py       # 向量存储
+│   │   └── rag.py          # RAG 核心
+│   └── config.py           # 配置
+├── requirements.txt
+└── README.md
+```
+
+---
+
+## 📁 文档结构
+
+```
+LingxiLearning/
+├── README.md           # 项目主页
+├── CHANGELOG.md        # 更新日志
+├── CONTRIBUTING.md      # 贡献指南
+├── LICENSE             # MIT 许可证
+├── docs/               # 项目文档
+│   ├── API接口文档.md
+│   └── POC实现计划.md
+├── Version1/           # V1.0 需求调研
+├── Version2/           # V2.0 产品设计
+├── Version3/           # V3.0 技术规格
+└── lingxi_poc/         # POC 代码框架
+    └── backend/
+        └── services/   # 核心服务
 ```
 
 ---
