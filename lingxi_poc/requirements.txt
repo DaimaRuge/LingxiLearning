@@ -1,26 +1,14 @@
-# 灵犀智读 - POC 依赖
+# 灵犀智读 - MVP 核心依赖
 
-# Web Framework
-fastapi>=0.109.0
-uvicorn>=0.27.0
+# Web UI
 streamlit>=1.28.0
 
 # 文档处理
 pymupdf>=1.23.0
-ebooklib>=0.18
-python-docx>=1.1.0
 
 # 向量处理
 qdrant-client>=1.7.0
 sentence-transformers>=2.2.0
 
-# 图谱
-networkx>=3.2.0
-
-# LLM
-zhipuai>=2.0.0
-
 # 工具
 python-dotenv>=1.0.0
-pydantic>=2.5.0
-numpy>=1.24.0

@@ -4,7 +4,8 @@
 
 [![License](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE)
 [![Python](https://img.shields.io/badge/python-3.10+-green.svg)]()
-[![Version](https://img.shields.io/badge/version-0.2.0-green.svg)]()
+[![Streamlit](https://img.shields.io/badge/streamlit-1.28+-red.svg)]()
+[![Version](https://img.shields.io/badge/version-0.3.0-green.svg)]()
 
 ---
 
@@ -20,157 +21,110 @@
 
 ---
 
-## 🎯 核心功能
+## 🚀 快速启动
 
-| 模块 | 功能 | 状态 |
-|------|------|------|
-| M1 | 分布式文档索引与关系重构 | 🚧 开发中 |
-| M2 | 知识网络扩展与完善 | 🚧 开发中 |
-| M3 | 学习与创作辅助 | 🚧 开发中 |
-| M4 | 个人终身学习伴侣 | 🚧 开发中 |
-| M5 | 课程规划与内容生成 | 📋 规划中 |
+### 前置要求
 
-### 核心特性 (POC 阶段)
+- Python 3.10+
+- Docker Desktop (用于 Qdrant 向量数据库)
 
-- 📚 **文档解析** - PDF/EPUB/MD/TXT 多格式支持
-- 🔍 **向量检索** - BGE 中文向量化 + Qdrant 存储
-- 🤖 **RAG 对话** - 基于检索的 AI 问答
-- 🗂️ **知识图谱** - 规划中
-- 📈 **成长追踪** - 规划中
+### 启动步骤
+
+```bash
+# 1. 克隆项目
+git clone https://github.com/DaimaRuge/LingxiLearning.git
+cd LingxiLearning/lingxi_poc
+
+# 2. 启动 Qdrant 向量数据库
+docker run -d -p 6333:6333 qdrant/qdrant
+
+# 3. 安装依赖
+pip install -r requirements.txt
+
+# 4. 启动应用
+streamlit run app.py
+
+# 5. 打开浏览器
+# 访问 http://localhost:8501
+```
+
+### Windows 用户
+
+直接双击运行 `start.bat`
 
 ---
 
-## 🏗️ 技术架构
+## 🎯 MVP 功能 (Demo)
 
-```
-用户交互层：React + Electron + Flutter
-    ↓
-Agent 服务层：OpenClaw-style Framework
-    ↓
-知识服务层：Neo4j + Milvus + PostgreSQL
-    ↓
-基础模型层：GLM-5 / GPT-4 + BGE + LLaVA
-```
-
-### POC 技术栈
-
-| 组件 | 技术 | 状态 |
+| 功能 | 说明 | 状态 |
 |------|------|------|
-| Web UI | Streamlit | 🚧 开发中 |
-| 后端 | FastAPI | 🚧 开发中 |
-| 向量数据库 | Qdrant | ✅ 就绪 |
-| Embedding | BGE-large-zh | ✅ 就绪 |
-| LLM | GLM-5 | 🚧 接入中 |
-| 文档解析 | PyMuPDF | ✅ 就绪 |
+| 📖 文档导入 | 支持 PDF/TXT/MD | ✅ 可用 |
+| 🔍 文档解析 | 文本提取与分块 | ✅ 可用 |
+| 💬 AI 对话 | 基于 RAG 的问答 | 🚧 待接入 GLM |
+| 🗺️ 知识图谱 | 可视化知识网络 | 📋 规划中 |
 
 ---
 
-## 📂 文档结构
+## 📂 项目结构
 
 ```
 LingxiLearning/
-├── Version1/           # 需求与调研
-│   ├── 01_需求深度分析.md
-│   ├── 02_竞品分析与市场研究.md
-│   ├── 03_技术调研报告.md
-│   └── 04_V1产品概览.md
-├── Version2/           # 原型与商业
-│   ├── 01_产品原型设计.md
-│   ├── 02_商业模式细化.md
-│   └── 03_V2产品概览.md
-├── Version3/           # 正式规格
-│   ├── 01_产品规格说明书.md
-│   └── 02_V3产品概览.md
-└── README.md           # 本文件
+├── README.md              # 项目主页
+├── CHANGELOG.md          # 更新日志
+├── LICENSE               # MIT 许可证
+├── docs/                 # 项目文档
+│   ├── API接口文档.md
+│   └── POC实现计划.md
+├── Version1/             # V1.0 需求调研
+├── Version2/             # V2.0 产品设计
+├── Version3/             # V3.0 技术规格
+└── lingxi_poc/          # MVP Demo 代码
+    ├── app.py            # Streamlit Web UI
+    ├── start.bat         # Windows 启动脚本
+    ├── requirements.txt   # Python 依赖
+    ├── env.example       # 环境变量示例
+    └── backend/
+        ├── config.py      # 配置
+        └── services/
+            ├── parser.py   # 文档解析
+            ├── embedding.py # 向量化
+            ├── vector.py   # 向量存储
+            └── rag.py     # RAG 服务
 ```
 
 ---
 
-## 🚀 里程碑
+## 🛠️ 技术栈
+
+| 组件 | 技术 | 说明 |
+|------|------|------|
+| Web UI | Streamlit | 快速原型 |
+| 向量数据库 | Qdrant | 轻量级向量存储 |
+| Embedding | BGE-large-zh | 中文向量化模型 |
+| 文档解析 | PyMuPDF | PDF 处理 |
+| LLM | GLM-5 (待接入) | 大语言模型 |
+
+---
+
+## 📊 里程碑
 
 | 阶段 | 时间 | 目标 |
 |------|------|------|
-| MVP | Month 3 | 文档索引 + AI 对话 + 知识图谱 |
-| Pro | Month 6 | 个人 AI 伴侣 + 学习路径 |
-| Enterprise | Month 9 | 企业知识库 + Agent 生成平台 |
+| MVP Demo | 2026-03 | 文档解析 + 对话 |
+| MVP Pro | Month 3 | 完整 RAG + 图谱 |
+| Pro | Month 6 | 个人 AI 伴侣 |
+| Enterprise | Month 9 | 企业知识库 |
 
 ---
 
-## 💡 竞品分析
+## 💡 核心差异化
 
-| 产品 | 定位 | 本产品差异 |
+| 竞品 | 定位 | 本产品差异 |
 |------|------|------------|
-| Notion | All-in-One 工作空间 | 知识图谱 + AI 伴侣 |
-| Zotero | 学术文献管理 | AI 辅助 + 记忆系统 |
+| Notion | All-in-One | 知识图谱 + AI 伴侣 |
+| Zotero | 学术文献 | AI 辅助 + 记忆 |
 | Obsidian | 双链笔记 | 多端 + AI 原生 |
 | ChatGPT | AI 对话 | 个人知识库 + 持久记忆 |
-
----
-
-## 📊 市场机会
-
-| 细分市场 | 规模 | 增长率 |
-|----------|------|--------|
-| 个人知识库 | $2B | 30% CAGR |
-| AI 教育 | $6B | 40% CAGR |
-| 知识管理 | $4.5B | 15% CAGR |
-
----
-
-## 🛠️ 开发指南
-
-### 本地开发
-
-```bash
-# 克隆项目
-git clone https://github.com/DaimaRuge/LingxiLearning.git
-
-# 安装依赖
-cd lingxi_poc
-pip install -r requirements.txt
-
-# 启动 Qdrant (Docker)
-docker run -d -p 6333:6333 qdrant/qdrant
-
-# 运行 Streamlit UI
-streamlit run lingxi_poc/app.py
-```
-
-### 项目结构
-
-```
-lingxi_poc/
-├── backend/
-│   ├── services/
-│   │   ├── parser.py       # 文档解析
-│   │   ├── embedding.py     # 向量化
-│   │   ├── vector.py       # 向量存储
-│   │   └── rag.py          # RAG 核心
-│   └── config.py           # 配置
-├── requirements.txt
-└── README.md
-```
-
----
-
-## 📁 文档结构
-
-```
-LingxiLearning/
-├── README.md           # 项目主页
-├── CHANGELOG.md        # 更新日志
-├── CONTRIBUTING.md      # 贡献指南
-├── LICENSE             # MIT 许可证
-├── docs/               # 项目文档
-│   ├── API接口文档.md
-│   └── POC实现计划.md
-├── Version1/           # V1.0 需求调研
-├── Version2/           # V2.0 产品设计
-├── Version3/           # V3.0 技术规格
-└── lingxi_poc/         # POC 代码框架
-    └── backend/
-        └── services/   # 核心服务
-```
 
 ---
 
@@ -183,13 +137,6 @@ LingxiLearning/
 ## 📄 许可证
 
 MIT License - 详见 [LICENSE](LICENSE) 文件
-
----
-
-## 📧 联系方式
-
-- **GitHub Issues**: [DaimaRuge/LingxiLearning Issues](https://github.com/DaimaRuge/LingxiLearning/issues)
-- **邮箱**: 待定
 
 ---
 
